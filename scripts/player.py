@@ -11,8 +11,8 @@ print(files)
 names = [tbdata[-1].data[i].name for i in range(len(tbdata[-1].data))]
 
 outdata = []
-av_waves = [1,1,1,1,1,1,1,1]
-av_attempts = [1,1,1,1,1,1,1,1]
+av_waves = [43.62,42.2,41.4,44.8,48,49,49,50]
+av_attempts = [44.24,38.8,41.3,43.4,41,41,41,40]
 for name in names:
     waves = []
     attempts = []
@@ -53,16 +53,17 @@ def player_to_plots():
     for data in outdata:
         plotstr += \
         " {\n" +\
-        "    label: '"+data[0]+" - Waves',\n"+\
+        "    label: '"+data[0]+"',\n"+\
         "    data: ["+array_to_string(data[1])+"],\n"\
         "    borderColor:  'rgb(75, 200, 200)',\n"+\
         "    hidden: true,\n"+\
-        "},{\n"+\
-        "    label: '"+data[0]+" - Attempts',\n"+\
-        "    data: ["+array_to_string(data[2])+"],\n"\
-        "    borderColor:  'rgb(200, 75, 75)',\n"+\
-        "    hidden: true,\n"+\
         "},\n"
+        #,{\n"+\
+        #"    label: '"+data[0]+" - Attempts',\n"+\
+        #"    data: ["+array_to_string(data[2])+"],\n"\
+        #"    borderColor:  'rgb(200, 75, 75)',\n"+\
+        #"    hidden: true,\n"+\
+        #"},\n"
     return plotstr
     
     
@@ -71,7 +72,7 @@ replacestring += \
         "    label: '"+"Guild Average"+" - Waves',\n"+\
         "    data: ["+array_to_string(av_waves)+"],\n"\
         "    borderColor:  'rgb(0, 0, 0)',\n"+\
-        "    hidden: true,\n"+\
+        "    hidden: false,\n"+\
         "},{\n"+\
         "    label: '"+"Guild Average"+" - Attempts',\n"+\
         "    data: ["+array_to_string(av_attempts)+"],\n"\
