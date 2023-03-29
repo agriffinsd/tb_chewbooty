@@ -1,0 +1,27 @@
+// setup 
+const data = {
+$$PLOTS
+};
+
+// config 
+const config = {
+  type: 'line',
+  data,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+};
+
+// render init block
+const myChart = new Chart(
+  document.getElementById('myChart'),
+  config
+);
+
+// Instantly assign Chart.js version
+const chartVersion = document.getElementById('chartVersion');
+chartVersion.innerText = Chart.version;
