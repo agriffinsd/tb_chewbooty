@@ -30,12 +30,14 @@ def bools(string):
 
 class Player(object):
     
-    def __init__(self, name, waves, attempts, deploys, ops):
+    def __init__(self, name, waves, attempts, deploys, ops, tbpoints, allpoints):
         self.name = name
         self.waves = np.array(waves)
         self.attempts = np.array(attempts)
         self.deployments = np.array(deploys)
         self.ops = ops
+        self.tbpoints = tbpoints
+        self.fullpoints = allpoints #includes deployments
         
     @staticmethod
     def row_to_player(row):
@@ -50,7 +52,11 @@ class Player(object):
                    bools(row[17]), bools(row[23]),\
                    bools(row[29]), bools(row[35])]
         ops = int(row[2])
-        return Player(name, waves, attempts, deploys, ops)
+        points = int(row[1])-int(row[7])-\
+                 int(row[13])-int(row[19])-\
+                 int(row[25])-int(row[31])-int(row[37])
+        allpoints = int(row[1])
+        return Player(name, waves, attempts, deploys, ops, points, allpoints)
 
 
     
@@ -104,11 +110,23 @@ class TBfile(object):
             outstr5 += "'" + str(player.ops) + "', "
         outstr5 += "],"
         
+        outstr6 = "    data: ["
+        for player in self.data:
+            outstr6 += "'" + str(player.tbpoints) + "', "
+        outstr6 += "],"
+        
+        outstr7 = "    data: ["
+        for player in self.data:
+            outstr7 += "'" + str(player.fullpoints) + "', "
+        outstr7 += "],"
+        
         filedata = filedata.replace("$$LABELS",outstr)
         filedata = filedata.replace("$$WAVES",outstr2)
         filedata = filedata.replace("$$ATTEMPTS",outstr3)
         filedata = filedata.replace("$$DEPLOYS",outstr4)
         filedata = filedata.replace("$$OPS",outstr5)
+        filedata = filedata.replace("$$POINTS",outstr6)
+        filedata = filedata.replace("$$ALLPOINTS",outstr7)
         
         outfile = open(fileout, "w")
         outfile.write(filedata)
