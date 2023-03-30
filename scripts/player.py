@@ -10,6 +10,8 @@ else:
     maxtb = 8
 files = ["../tb_data/tb_"+str(i)+".csv" for i in range(1,maxtb+1)]
 tbdata = [TBfile.readfile(files[i-1], i) for i in range (1,maxtb+1)]
+for tb in tbdata:
+    tb.data.sort(key=lambda x: x.name.upper(), reverse=False)
 
 print(files)
 
