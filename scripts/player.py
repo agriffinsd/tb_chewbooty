@@ -1,19 +1,28 @@
+"""
+Script for generating players graph
+
+GS
+
+30/03/23
+"""
+
 from tbdata import Player
 from tbdata import TBfile
 import numpy as np
 import sys
 
-
+# Get most recent tb from the terminal else default to 8
 if len(sys.argv) > 1:
     maxtb = int(sys.argv[1])
 else:
     maxtb = 8
+
 files = ["../tb_data/tb_"+str(i)+".csv" for i in range(1,maxtb+1)]
 tbdata = [TBfile.readfile(files[i-1], i) for i in range (1,maxtb+1)]
+
+# Sort player data by name
 for tb in tbdata:
     tb.data.sort(key=lambda x: x.name.upper(), reverse=False)
-
-print(files)
 
 names = [tbdata[-1].data[i].name for i in range(len(tbdata[-1].data))]
 
@@ -49,8 +58,6 @@ for i in range(1,maxtb+1):
     replacestring += "'TB" + str(i) +"', "
 replacestring += "],\n"
 
-
-
 replacestring += "  datasets: ["
 
 def array_to_string(arr):
@@ -58,8 +65,6 @@ def array_to_string(arr):
     for val in arr:
         string += "'" + str(val) + "', "
     return string
-
-
 
 def player_to_plots():
     plotstr = ""
