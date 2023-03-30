@@ -1,8 +1,13 @@
 from tbdata import Player
 from tbdata import TBfile
 import numpy as np
+import sys
 
-maxtb = 8
+
+if len(sys.argv) > 1:
+    maxtb = int(sys.argv[1])
+else:
+    maxtb = 8
 files = ["../tb_data/tb_"+str(i)+".csv" for i in range(1,maxtb+1)]
 tbdata = [TBfile.readfile(files[i-1], i) for i in range (1,maxtb+1)]
 
@@ -11,8 +16,9 @@ print(files)
 names = [tbdata[-1].data[i].name for i in range(len(tbdata[-1].data))]
 
 outdata = []
-av_waves = [43.62,42.2,41.4,44.8,48,49,49,50]
-av_attempts = [44.24,38.8,41.3,43.4,41,41,41,40]
+av_waves = [i.get_average_waves()[0] for i in tbdata]
+av_attempts = [i.get_average_waves()[1] for i in tbdata]
+
 for name in names:
     waves = []
     attempts = []
@@ -36,8 +42,14 @@ infile = open("../input_files/player.js.in", "r")
 filedata = infile.read()
 infile.close()
 replacestring = \
-"  labels: ['TB1', 'TB2', 'TB3', 'TB4', 'TB5', 'TB6', 'TB7', 'TB8'],\n"+\
-"  datasets: ["
+"  labels: ["
+for i in range(1,maxtb+1):
+    replacestring += "'TB" + str(i) +"', "
+replacestring += "],\n"
+
+
+
+replacestring += "  datasets: ["
 
 def array_to_string(arr):
     string = ""
@@ -49,19 +61,21 @@ def array_to_string(arr):
 
 def player_to_plots():
     plotstr = ""
-    colvar = 1
     for data in outdata:
+        colour = [str(np.random.randint(1,256)), \
+                  str(np.random.randint(1,256)), \
+                  str(np.random.randint(1,256))]
         plotstr += \
         " {\n" +\
         "    label: '"+data[0]+"',\n"+\
         "    data: ["+array_to_string(data[1])+"],\n"\
-        "    borderColor:  'rgb(75, 200, 200)',\n"+\
+        "    borderColor:  'rgb("+colour[0]+", "+colour[1]+", "+colour[2]+")',\n"+\
         "    hidden: true,\n"+\
         "},\n"
         #,{\n"+\
         #"    label: '"+data[0]+" - Attempts',\n"+\
         #"    data: ["+array_to_string(data[2])+"],\n"\
-        #"    borderColor:  'rgb(200, 75, 75)',\n"+\
+        #"    borderColor:  'rgb("+colour[0]+", "+colour[1]+", "+colour[2]+")',\n"+\
         #"    hidden: true,\n"+\
         #"},\n"
     return plotstr

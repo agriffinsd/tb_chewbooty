@@ -127,7 +127,13 @@ class TBfile(object):
         outfile.write(filedata)
         outfile.close()
         
-        
+    def get_average_waves(self):
+        wavetotal = 0
+        attempttotal = 0
+        for player in self.data:
+            wavetotal += np.sum(player.waves)
+            attempttotal += np.sum(player.attempts)
+        return wavetotal/len(self.data), attempttotal/len(self.data)
 
 
 
