@@ -120,6 +120,11 @@ class TBfile(object):
             outstr7 += "'" + str(player.fullpoints) + "', "
         outstr7 += "],"
         
+        outstr8 = "    data: ["
+        for player in self.data:
+            outstr8 += "'" + str(player.waves[5]) + "', "
+        outstr8 += "],"
+        
         filedata = filedata.replace("$$LABELS",outstr)
         filedata = filedata.replace("$$WAVES",outstr2)
         filedata = filedata.replace("$$ATTEMPTS",outstr3)
@@ -127,6 +132,8 @@ class TBfile(object):
         filedata = filedata.replace("$$OPS",outstr5)
         filedata = filedata.replace("$$POINTS",outstr6)
         filedata = filedata.replace("$$ALLPOINTS",outstr7)
+        filedata = filedata.replace("$$P6WAVES",outstr8)
+        
         
         outfile = open(fileout, "w")
         outfile.write(filedata)
