@@ -85,5 +85,5 @@ if __name__ == "__main__":
     for p in reva.data:
         print (p.name, p.tbs)
     
-    reva.to_javascript("../input_files/reva.js.in", "../reva/reva.js", 2)
+    reva.to_javascript("../input_files/reva.js.in", "../reva/reva.js", 3)
     
