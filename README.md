@@ -4,8 +4,8 @@ Data Tracking for BSE TB performance over time.
 
 ## Updating
 - Add the tb data from hotutils in tb_data dir
-- Run the two python scripts
-```python player.py <tbno>```
-```python tbdata.py <tbno>```
-- Link tbdata page in index
+- Put reva data in reva dir
+- Update the params file for latest tb
+- Run the python script
+```python update.py```
 - Check everything looks ok before pushing

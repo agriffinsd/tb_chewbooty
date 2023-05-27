@@ -47,7 +47,7 @@ for name in names:
             
                 
     outdata.append([name, waves, attempts])
-print(outdata)
+#print(outdata)
 
 infile = open("../input_files/player.js.in", "r")
 filedata = infile.read()

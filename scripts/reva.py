@@ -1,4 +1,5 @@
 import csv
+import sys
 
 class RevaPlayer(object):
     
@@ -41,7 +42,7 @@ class RevaFile(object):
         it = 0
         for row in inputdata:
             if it > 1:
-                print(row)
+                #print(row)
                 data.append(RevaPlayer.row_to_player(row))
             it +=1 
         infile.close()
@@ -82,8 +83,8 @@ class RevaFile(object):
         
 if __name__ == "__main__":
     reva = RevaFile.readfile("../reva/BSE - TB3 Planning - Reva.csv")
-    for p in reva.data:
-        print (p.name, p.tbs)
+    #for p in reva.data:
+    #    print (p.name, p.tbs)
     
-    reva.to_javascript("../input_files/reva.js.in", "../reva/reva.js", 3)
+    reva.to_javascript("../input_files/reva.js.in", "../reva/reva.js", int(sys.argv[1])-9)
     
