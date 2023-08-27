@@ -30,9 +30,11 @@ def bools(string):
 
 class Player(object):
     
-    def __init__(self, name, waves, attempts, deploys, ops, tbpoints, allpoints):
+    def __init__(self, name, waves, attempts, deploys, ops, tbpoints, allpoints,\
+                 specials):
         self.name = name
         self.waves = np.array(waves)
+        self.specials = np.array(specials)
         self.attempts = np.array(attempts)
         self.deployments = np.array(deploys)
         self.ops = ops
@@ -56,7 +58,11 @@ class Player(object):
                  int(row[13])-int(row[19])-\
                  int(row[25])-int(row[31])-int(row[37])
         allpoints = int(row[1])
-        return Player(name, waves, attempts, deploys, ops, points, allpoints)
+        specials = [int(row[9]), int(row[15]),\
+                    int(row[21]), int(row[27]),\
+                    int(row[33]), int(row[39])]
+        return Player(name, waves, attempts, deploys, ops, points, allpoints,\
+                      specials)
 
 
     
@@ -125,6 +131,36 @@ class TBfile(object):
             outstr8 += "'" + str(player.waves[5]) + "', "
         outstr8 += "],"
         
+        outstr9 = "    data: ["
+        for player in self.data:
+            outstr9 += "'" + str(player.waves[0]) + "', "
+        outstr9 += "],"
+
+        outstr10 = "    data: ["
+        for player in self.data:
+            outstr10 += "'" + str(player.waves[1]) + "', "
+        outstr10 += "],"
+        
+        outstr11 = "    data: ["
+        for player in self.data:
+            outstr11 += "'" + str(player.waves[2]) + "', "
+        outstr11 += "],"
+
+        outstr12 = "    data: ["
+        for player in self.data:
+            outstr12 += "'" + str(player.waves[3]) + "', "
+        outstr12 += "],"
+        
+        outstr13 = "    data: ["
+        for player in self.data:
+            outstr13 += "'" + str(player.waves[4]) + "', "
+        outstr13 += "],"
+        
+        outstr14 = "    data: ["
+        for player in self.data:
+            outstr14 += "'" + str(np.sum(player.specials)) + "', "
+        outstr14 += "],"
+        
         filedata = filedata.replace("$$LABELS",outstr)
         filedata = filedata.replace("$$WAVES",outstr2)
         filedata = filedata.replace("$$ATTEMPTS",outstr3)
@@ -132,7 +168,13 @@ class TBfile(object):
         filedata = filedata.replace("$$OPS",outstr5)
         filedata = filedata.replace("$$POINTS",outstr6)
         filedata = filedata.replace("$$ALLPOINTS",outstr7)
+        filedata = filedata.replace("$$P1WAVES",outstr9)
+        filedata = filedata.replace("$$P2WAVES",outstr10)
+        filedata = filedata.replace("$$P3WAVES",outstr11)
+        filedata = filedata.replace("$$P4WAVES",outstr12)
+        filedata = filedata.replace("$$P5WAVES",outstr13)
         filedata = filedata.replace("$$P6WAVES",outstr8)
+        filedata = filedata.replace("$$SPECIALS",outstr14)
         
         
         outfile = open(fileout, "w")

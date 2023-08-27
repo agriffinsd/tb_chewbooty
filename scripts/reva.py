@@ -11,7 +11,7 @@ class RevaPlayer(object):
         
     @staticmethod
     def row_to_player(row):
-        print(row)
+        #print(row)
         name = row[1]
         rate = row[0]
         readyin = row[2]
