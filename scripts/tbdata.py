@@ -108,7 +108,7 @@ class TBfile(object):
         
         outstr4 = "    data: ["
         for player in self.data:
-            outstr4 += "'" + str(np.count_nonzero(player.deployments)) + "', "
+            outstr4 += "'" + str(np.count_nonzero(player.deployments[1:])) + "', "
         outstr4 += "],"
         
         outstr5 = "    data: ["
