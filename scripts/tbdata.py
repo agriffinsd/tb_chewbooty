@@ -31,7 +31,7 @@ def bools(string):
 class Player(object):
     
     def __init__(self, name, waves, attempts, deploys, ops, tbpoints, allpoints,\
-                 specials):
+                 specials, deployments):
         self.name = name
         self.waves = np.array(waves)
         self.specials = np.array(specials)
@@ -40,6 +40,7 @@ class Player(object):
         self.ops = ops
         self.tbpoints = tbpoints
         self.fullpoints = allpoints #includes deployments
+        self.deployedgp = np.array(deployments)
         
     @staticmethod
     def row_to_player(row):
@@ -61,8 +62,18 @@ class Player(object):
         specials = [int(row[9]), int(row[15]),\
                     int(row[21]), int(row[27]),\
                     int(row[33]), int(row[39])]
+        deployments = [int(row[7]), int(row[13]),\
+                    int(row[19]), int(row[25]),\
+                    int(row[31]), int(row[37])]
         return Player(name, waves, attempts, deploys, ops, points, allpoints,\
-                      specials)
+                      specials, deployments)
+    
+    def estimate_gp(self):
+        gps = [self.deployedgp[i] for i in [0,1,2,3,4,5]]
+        gp_est = max(gps)
+        if gp_est < 1000000:
+            return 0
+        return gp_est
 
 
     
@@ -202,7 +213,55 @@ class TBfile(object):
             attempttotal += np.sum(player.attempts)
         return wavetotal/len(self.data), attempttotal/len(self.data)
 
-
+    def end_of_tb_report(self, tbno):
+        self.data.sort(key=lambda x: np.sum(x.fullpoints), reverse=True)
+        top_3 = self.data[0:3]
+        bottom_3 = self.data[-1:-4:-1]
+        average = np.average([np.sum(pl.fullpoints) for pl in self.data])
+        print("# TB"+str(tbno)+ " REPORT :parrot:")
+        print("## TERRITORY POINTS")
+        print("Top 3 Total Territory Points:")
+        for pl in top_3:
+            print("- "+ str(pl.name)+": "+f'{(np.sum(pl.fullpoints) // 100000) /10}m')
+        print("Bottom 3 Total Territory Points:")
+        for pl in bottom_3:
+            print("- "+ str(pl.name)+": "+f'{(np.sum(pl.fullpoints) // 100000) /10}m')
+        print("Guild Average - "+f'{(average // 100000) /10}m')
+        print("")
+        print("## WAVE COUNTS")
+        self.data.sort(key=lambda x: np.sum(x.waves), reverse=True)
+        top_3 = self.data[0:3]
+        bottom_3 = self.data[-1:-4:-1]
+        average = np.average([np.sum(pl.waves) for pl in self.data])
+        std = np.std([np.sum(pl.waves) for pl in self.data])
+        print("Top 3 wave counts:")
+        for pl in top_3:
+            print("- "+ str(pl.name)+": "+str(np.sum(pl.waves)))
+        print("Bottom 3 wave counts:")
+        for pl in bottom_3:
+            print("- "+ str(pl.name)+": "+str(np.sum(pl.waves)))
+        print("Guild Average - "+str(round(average,2)) + " +/- " +str(round(std,2)))
+        print("")
+        print("## NO DEPLOYMENTS :warning:")
+        missed_gp_total = 0
+        for phase in [1,2,3,4,5]:
+            no_deploys = []
+            for pl in self.data:
+                 if not pl.deployments[phase]:
+                     no_deploys.append(pl)
+            if (len(no_deploys)>0):
+                print("Phase "+str(phase+1)+":")
+                for pl in no_deploys:
+                    missed_gp = pl.estimate_gp()-(pl.deployedgp[phase])
+                    missed_gp_total += missed_gp
+                    print("- "+ str(pl.name) + " ~" + f'{(missed_gp // 100000) /10}m'  )
+                if phase==5:
+                    print("(Phase 6 data is collected "+\
+                           "10 mins before end of tb)")
+        if missed_gp_total >0:
+            print("Total missed GP in deployment - **" + f'{(missed_gp_total // 100000) /10}m**')
+                         
+            
 
 
 def main(args):
@@ -211,6 +270,7 @@ def main(args):
     tb.data.sort(key=lambda x: np.sum(x.waves), reverse=True)
     tb.to_javascript("../input_files/tb.js.in", "../tbs/tb"+tbval+".js")
     tb.to_html("../input_files/tb.html.in", "../tbs/tb"+tbval+".html")
+    tb.end_of_tb_report(tbval)
     
     
     return 0
