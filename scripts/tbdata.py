@@ -219,6 +219,7 @@ class TBfile(object):
         bottom_3 = self.data[-1:-4:-1]
         average = np.average([np.sum(pl.fullpoints) for pl in self.data])
         print("# TB"+str(tbno)+ " REPORT :parrot:")
+        print("[Full Stats Online](https://genskaar.github.io/tb_bse/index.html)")
         print("## TERRITORY POINTS")
         print("Top 3 Total Territory Points:")
         for pl in top_3:
