@@ -266,12 +266,14 @@ class TBfile(object):
 
 
 def main(args):
-    tbval = sys.argv[1]
-    tb = TBfile.readfile("../tb_data/tb_"+tbval+".csv", tbval)
-    tb.data.sort(key=lambda x: np.sum(x.waves), reverse=True)
-    tb.to_javascript("../input_files/tb.js.in", "../tbs/tb"+tbval+".js")
-    tb.to_html("../input_files/tb.html.in", "../tbs/tb"+tbval+".html")
-    tb.end_of_tb_report(tbval)
+    tbmax = sys.argv[1]
+    for tbval in range(1,int(tbmax)+1):
+        tbval = str(tbval)
+        tb = TBfile.readfile("../tb_data/tb_"+tbval+".csv", tbval)
+        tb.data.sort(key=lambda x: np.sum(x.waves), reverse=True)
+        tb.to_javascript("../input_files/tb.js.in", "../tbs/tb"+tbval+".js")
+        tb.to_html("../input_files/tb.html.in", "../tbs/tb"+tbval+".html")
+    tb.end_of_tb_report(tbmax)
     
     
     return 0
