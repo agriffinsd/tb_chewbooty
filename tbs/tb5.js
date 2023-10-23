@@ -203,12 +203,22 @@ const config = {
   type: 'bar',
   data,
   options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
+        scales: {
+            x: {
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 90,
+                    minRotation: 90
+                }
+            }
+        },
+	    plugins: {
+			tooltip: {
+				mode: 'index',
+				intersect: false
+		    },
+		}
     }
-  }
 };
 
 // render init block
