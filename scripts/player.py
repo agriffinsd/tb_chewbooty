@@ -17,6 +17,11 @@ if len(sys.argv) > 1:
 else:
     maxtb = 8
 
+if len(sys.argv) > 2 and sys.argv[2] == "trendline":
+        trendline=True
+else:
+    trendline=False
+
 files = ["../tb_data/tb_"+str(i)+".csv" for i in range(1,maxtb+1)]
 tbdata = [TBfile.readfile(files[i-1], i) for i in range (1,maxtb+1)]
 
@@ -77,8 +82,13 @@ def player_to_plots():
         "    label: '"+data[0]+"',\n"+\
         "    data: ["+array_to_string(data[1])+"],\n"\
         "    borderColor:  'rgb("+colour[0]+", "+colour[1]+", "+colour[2]+")',\n"+\
-        "    hidden: true,\n"+\
-        "},\n"
+        "    hidden: true,\n"
+        if trendline:
+            plotstr+="    trendlineLinear: {\n"+\
+		    '      lineStyle: "dotted",\n'+\
+		    "      width: 2,\n"+\
+            "    },\n"
+        plotstr+="},\n"
         #,{\n"+\
         #"    label: '"+data[0]+" - Attempts',\n"+\
         #"    data: ["+array_to_string(data[2])+"],\n"\
@@ -93,7 +103,13 @@ replacestring += \
         "    label: '"+"Guild Average"+" - Waves',\n"+\
         "    data: ["+array_to_string(av_waves)+"],\n"\
         "    borderColor:  'rgb(0, 0, 0)',\n"+\
-        "    hidden: false,\n"+\
+        "    hidden: false,\n"
+if trendline:
+        replacestring+="    trendlineLinear: {\n"+\
+		    '      lineStyle: "dotted",\n'+\
+		    "      width: 2,\n"+\
+            "    },\n"
+replacestring+=\
         "},{\n"+\
         "    label: '"+"Guild Average"+" - Attempts',\n"+\
         "    data: ["+array_to_string(av_attempts)+"],\n"\
