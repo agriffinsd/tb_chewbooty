@@ -273,9 +273,8 @@ def main(args):
         tb.data.sort(key=lambda x: np.sum(x.waves), reverse=True)
         tb.to_javascript("../input_files/tb.js.in", "../tbs/tb"+tbval+".js")
         tb.to_html("../input_files/tb.html.in", "../tbs/tb"+tbval+".html")
-    tb.end_of_tb_report(tbmax)
-    
-    
+    if "report" in args:
+        tb.end_of_tb_report(tbmax)
     return 0
 
 if __name__ == '__main__':

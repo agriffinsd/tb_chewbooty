@@ -1,8 +1,11 @@
-from tbdata import Player
-from tbdata import TBfile
+"""
+Main script for updating all tb data
+"""
+import sys
+import os
 import numpy as np
-import sys, os
 
+options = sys.argv[1:]
 
 infile = open("../input_files/index.html.in", "r")
 filedata = infile.read()
@@ -74,7 +77,12 @@ filedata = filedata.replace("$$INPUTS",outstr)
 outfile.write(filedata)
 outfile.close()
 
-
-os.system("python3 tbdata.py " + str(number_tbs))
+if "report" in options:
+    os.system("python3 tbdata.py " + str(number_tbs) + " report")
+else:
+    os.system("python3 tbdata.py " + str(number_tbs))
 os.system("python3 reva.py " + str(number_tbs))
-os.system("python3 player.py " + str(number_tbs))
+if "trendline" in options:
+    os.system("python3 player.py " + str(number_tbs) + " trendline")
+else:
+    os.system("python3 player.py " + str(number_tbs))
