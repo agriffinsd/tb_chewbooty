@@ -141,6 +141,7 @@ def player_to_plots():
         "    data: ["+array_to_string(data[1])+"],\n"\
         "    borderColor:  'rgb("+colour[0]+", "+colour[1]+", "+colour[2]+")',\n"+\
         "    backgroundColor:  'rgb("+colour[0]+", "+colour[1]+", "+colour[2]+")',\n"+\
+        "    pointRadius: 10,\n"+\
         "    hidden: true,\n"
         plotstr+="},\n"
         #,{\n"+\
@@ -158,6 +159,7 @@ replacestring += \
         "    data: ["+array_to_string(av_waves)+"],\n"\
         "    borderColor:  'rgb(0, 0, 0)',\n"+\
         "    backgroundColor:  'rgb(0, 0, 0)',\n"+\
+        "    pointRadius: 10,\n"+\
         "    hidden: false,\n"
 replacestring+=\
         "},\n"    
