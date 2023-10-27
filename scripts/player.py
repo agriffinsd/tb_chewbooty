@@ -81,6 +81,7 @@ def player_to_plots():
         " {\n" +\
         "    label: '"+data[0]+"',\n"+\
         "    data: ["+array_to_string(data[1])+"],\n"\
+        "    backgroundColor:  'rgb("+colour[0]+", "+colour[1]+", "+colour[2]+")',\n"+\
         "    borderColor:  'rgb("+colour[0]+", "+colour[1]+", "+colour[2]+")',\n"+\
         "    hidden: true,\n"
         if trendline:
@@ -103,6 +104,7 @@ replacestring += \
         "    label: '"+"Guild Average"+" - Waves',\n"+\
         "    data: ["+array_to_string(av_waves)+"],\n"\
         "    borderColor:  'rgb(0, 0, 0)',\n"+\
+        "    backgroundColor:  'rgb(0, 0, 0)',\n"+\
         "    hidden: false,\n"
 if trendline:
         replacestring+="    trendlineLinear: {\n"+\
@@ -114,6 +116,7 @@ replacestring+=\
         "    label: '"+"Guild Average"+" - Attempts',\n"+\
         "    data: ["+array_to_string(av_attempts)+"],\n"\
         "    borderColor:  'rgb(0, 0, 0)',\n"+\
+        "    backgroundColor:  'rgb(0, 0, 0)',\n"+\
         "    hidden: true,\n"+\
         "},\n"    
     

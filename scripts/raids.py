@@ -140,6 +140,7 @@ def player_to_plots():
         "    label: '"+data[0]+"',\n"+\
         "    data: ["+array_to_string(data[1])+"],\n"\
         "    borderColor:  'rgb("+colour[0]+", "+colour[1]+", "+colour[2]+")',\n"+\
+        "    backgroundColor:  'rgb("+colour[0]+", "+colour[1]+", "+colour[2]+")',\n"+\
         "    hidden: true,\n"
         plotstr+="},\n"
         #,{\n"+\
@@ -156,6 +157,7 @@ replacestring += \
         "    label: '"+"Guild Average"+" - Score',\n"+\
         "    data: ["+array_to_string(av_waves)+"],\n"\
         "    borderColor:  'rgb(0, 0, 0)',\n"+\
+        "    backgroundColor:  'rgb(0, 0, 0)',\n"+\
         "    hidden: false,\n"
 replacestring+=\
         "},\n"    
