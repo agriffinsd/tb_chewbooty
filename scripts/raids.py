@@ -60,11 +60,22 @@ class raidfile():
 raids = raidfile.readfile(sys.argv[1])
 players = raidfile.make_players(raids)
 average_player = player("Guild Average", [])
+
+crate90 = player("90m Guild Crate", [])
+crate130 = player("130m Guild Crate", [])
+crate265 = player("265m Guild Crate", [])
+
+crates = [crate90, crate130, crate265]
+
+
 dates = []
 
 for raid in raids:
     raid.calc_average()
     raid.calc_total()
+    crate90.scores.append(str(90000000/50))
+    crate130.scores.append(str(130000000/50))
+    crate265.scores.append(str(265000000/50))
     print(raid.total, raid.average)
     dates.append(raid.date.split(" ")[0])
     average_player.scores.append(raid.average)
@@ -81,9 +92,12 @@ for raid in raids:
 for player in players:
     player.scores.reverse()
     #print(player.name, player.scores)
+
 average_player.scores.reverse()
 players.sort(key=lambda x: x.name.upper(), reverse=False)
 dates.reverse()
+
+players = crates + players
 
 # =============
 # Get most recent tb from the terminal else default to 8
@@ -95,7 +109,7 @@ outdata = []
 av_waves = [average_player.scores][0]
 
 for player in players[0:]:
-    outdata.append([player.name, [int(score) for score in player.scores]])
+    outdata.append([player.name, [float(score) for score in player.scores]])
 
 
 infile = open("../input_files/raids.js.in", "r")
