@@ -1,0 +1,38 @@
+// setup 
+const data = {
+$$PLOTS
+};
+
+// config 
+const config = {
+  type: 'line',
+  data,
+  options: {
+        scales: {
+            x: {
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 90,
+                    minRotation: 90
+                }
+            }
+        },
+	    plugins: {
+			tooltip: {
+				mode: 'index',
+				intersect: false
+		    },
+		}
+    }
+
+};
+
+// render init block
+const myChart = new Chart(
+  document.getElementById('myChart'),
+  config
+);
+
+// Instantly assign Chart.js version
+const chartVersion = document.getElementById('chartVersion');
+chartVersion.innerText = Chart.version;

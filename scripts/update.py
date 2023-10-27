@@ -46,7 +46,7 @@ tbdata.reverse()
 
 number_tbs = len(tbdata)
 
-number_of_rows = int(np.ceil((number_tbs+1)/3))
+number_of_rows = int(np.ceil((number_tbs+2)/3))
 
 r_it = number_tbs -1
 for row in range(number_of_rows):
@@ -59,7 +59,18 @@ for row in range(number_of_rows):
         '<p>Compare your wave count against other members and guild average.</p>\n'+\
         '</div>\n'+\
         '</div>\n'
-
+        outstr += '<div class="w3-third w3-container">\n'+\
+        '      <a href="raids/raid.html"><img src="media/krayt.jpeg" alt="Players" style="width:100%" class="w3-hover-opacity"> </a>\n'+\
+        '      <div class="w3-container w3-white">\n'+\
+        '<p><b>Raid Scores</b></p>\n'+\
+        '<p>Compare your Krayt Dragon score against other members and guild average.</p>\n'+\
+        '</div>\n'+\
+        '</div>\n'
+        if r_it >=0:
+            outstr += print_row(r_it,tbdata[r_it])
+        r_it -= 1
+        outstr += '  </div>\n\n'
+        continue
     else:
         outstr += print_first_row(r_it,tbdata[r_it])
         r_it -= 1
