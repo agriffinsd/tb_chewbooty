@@ -1,35 +1,30 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-#  
-#  Copyright 2023 <caoineag>
-#  
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#  
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#  
-#  You should have received a copy of the GNU General Public License
-#  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-#  MA 02110-1301, USA.
-#  
-# 
+"""
+Copyright 2023 <caoineag>
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301, USA.
+"""
 
 import csv
+import sys
+
 import numpy as np
-import os, sys
 
 def bools(string):
     return string=="Yes"
 
 class Player(object):
-    
     def __init__(self, name, waves, attempts, deploys, ops, tbpoints, allpoints,\
                  specials, deployments):
         self.name = name
@@ -41,9 +36,12 @@ class Player(object):
         self.tbpoints = tbpoints
         self.fullpoints = allpoints #includes deployments
         self.deployedgp = np.array(deployments)
-        
+
     @staticmethod
     def row_to_player(row):
+        """
+        Convert line of HU data to player object
+        """
         name = row[0]
         waves = [int(row[10]), int(row[16]),\
                  int(row[22]), int(row[28]),\
@@ -67,7 +65,7 @@ class Player(object):
                     int(row[31]), int(row[37])]
         return Player(name, waves, attempts, deploys, ops, points, allpoints,\
                       specials, deployments)
-    
+
     def estimate_gp(self):
         gps = [self.deployedgp[i] for i in [0,1,2,3,4,5]]
         gp_est = max(gps)
@@ -278,5 +276,4 @@ def main(args):
     return 0
 
 if __name__ == '__main__':
-    import sys
     sys.exit(main(sys.argv))
