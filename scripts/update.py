@@ -97,3 +97,5 @@ if "trendline" in options:
     os.system("python3 player.py " + str(number_tbs) + " trendline")
 else:
     os.system("python3 player.py " + str(number_tbs))
+
+os.system("python3 raids.py ../raids/raids.csv")

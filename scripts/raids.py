@@ -76,7 +76,7 @@ for raid in raids:
     crate90.scores.append(str(90000000/50))
     crate130.scores.append(str(130000000/50))
     crate265.scores.append(str(265000000/50))
-    print(raid.total, raid.average)
+    #print(raid.total, raid.average)
     dates.append(raid.date.split(" ")[0])
     average_player.scores.append(raid.average)
     for pair in raid.scores:
