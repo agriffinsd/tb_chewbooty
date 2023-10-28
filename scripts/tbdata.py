@@ -265,12 +265,13 @@ class TBfile(object):
 
 def main(args):
     tbmax = sys.argv[1]
+    GUILD_NAME = sys.argv[2]
     for tbval in range(1,int(tbmax)+1):
         tbval = str(tbval)
-        tb = TBfile.readfile("../tb_data/tb_"+tbval+".csv", tbval)
+        tb = TBfile.readfile("../"+GUILD_NAME+"tb_data/tb_"+tbval+".csv", tbval)
         tb.data.sort(key=lambda x: np.sum(x.waves), reverse=True)
-        tb.to_javascript("../input_files/tb.js.in", "../tbs/tb"+tbval+".js")
-        tb.to_html("../input_files/tb.html.in", "../tbs/tb"+tbval+".html")
+        tb.to_javascript("../"+GUILD_NAME+"input_files/tb.js.in", "../"+GUILD_NAME+"tbs/tb"+tbval+".js")
+        tb.to_html("../"+GUILD_NAME+"input_files/tb.html.in", "../"+GUILD_NAME+"tbs/tb"+tbval+".html")
     if "report" in args:
         tb.end_of_tb_report(tbmax)
     return 0

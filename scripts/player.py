@@ -12,6 +12,9 @@ from tbdata import TBfile
 
 # Get most recent tb from the terminal
 maxtb = int(sys.argv[1])
+GUILD_NAME= str(sys.argv[2])
+if "/" not in GUILD_NAME:
+    GUILD_NAME += "/"
 TRENDLINE = False
 
 # Command line option for including trendline
@@ -19,7 +22,7 @@ if len(sys.argv) > 2 and sys.argv[2] == "trendline":
     TRENDLINE = True
 
 # Load all the tb files from the tb_data dir
-files = ["../tb_data/tb_"+str(i)+".csv" for i in range(1,maxtb+1)]
+files = ["../"+GUILD_NAME+"tb_data/tb_"+str(i)+".csv" for i in range(1,maxtb+1)]
 tbdata = [TBfile.readfile(files[i-1], i) for i in range (1,maxtb+1)]
 
 # Sort player data by name
@@ -49,7 +52,7 @@ for name in names:
             attempts.append(0)
     outdata.append([name, waves, attempts])
 
-with open("../input_files/player.js.in", "r", encoding="UTF-8") as infile:
+with open("../"+GUILD_NAME+"input_files/player.js.in", "r", encoding="UTF-8") as infile:
     filedata = infile.read()
 
 # replacestring to replace the $$ in the .in file
@@ -126,6 +129,6 @@ replacestring+=\
 replacestring += player_to_plots()
 replacestring += "]\n"
 
-with open("../players/player.js", "w", encoding="UTF-8") as outfile:
+with open("../"+GUILD_NAME+"players/player.js", "w", encoding="UTF-8") as outfile:
     filedata = filedata.replace("$$PLOTS", replacestring)
     outfile.write(filedata)

@@ -6,13 +6,26 @@ import os
 import numpy as np
 
 options = sys.argv[1:]
+used_options = []
+GUILD_NAME = "unknown"
+for option in options:
+    if "BSE" in option:
+        GUILD_NAME="BSE/"
+        print("[+] Guild Accepted:", "BSE")
+        used_options.append(option)
 
-infile = open("../input_files/index.html.in", "r")
+if GUILD_NAME == "unknown":
+    print("[-] Unknown Guild. Please specify Guild in arguments")
+    exit()
+
+print("[+] Updating Index File")
+
+infile = open("../"+GUILD_NAME+"input_files/index.html.in", "r")
 filedata = infile.read()
 infile.close()
 
 
-outfile = open("../index.html", "w")
+outfile = open("../"+GUILD_NAME+"index.html", "w")
 outstr = ""
 
 
@@ -40,7 +53,7 @@ def print_row(tbno,tbstring):
 def make_tb_string(tbdata):
 	return '1'
 
-tbdata = open('../param.txt','r').readlines()
+tbdata = open('../'+GUILD_NAME+'param.txt','r').readlines()
 tbdata.reverse()
 
 
@@ -87,15 +100,25 @@ for row in range(number_of_rows):
 filedata = filedata.replace("$$INPUTS",outstr)
 outfile.write(filedata)
 outfile.close()
-
+print("[+] Updating individual tb data for "+str(number_tbs)+" tbs")
 if "report" in options:
-    os.system("python3 tbdata.py " + str(number_tbs) + " report")
+    used_options.append("report")
+    os.system("python3 tbdata.py " + str(number_tbs) + " "+  GUILD_NAME+ " report")
 else:
-    os.system("python3 tbdata.py " + str(number_tbs))
-os.system("python3 reva.py " + str(number_tbs))
-if "trendline" in options:
-    os.system("python3 player.py " + str(number_tbs) + " trendline")
-else:
-    os.system("python3 player.py " + str(number_tbs))
+    os.system("python3 tbdata.py " + str(number_tbs) +" "+ GUILD_NAME)
+os.system("python3 reva.py " + str(number_tbs)+" "+ GUILD_NAME)
 
-os.system("python3 raids.py ../raids/raids.csv")
+print("[+] Updating player tb datas")
+
+if "trendline" in options:
+    used_options.append("trendline")
+    os.system("python3 player.py " + str(number_tbs) + " " + GUILD_NAME+ " trendline")
+else:
+    os.system("python3 player.py " + str(number_tbs) +" "+ GUILD_NAME)
+
+print("[+] Updating raid data")
+os.system("python3 raids.py ../"+GUILD_NAME+"raids/raids.csv " + GUILD_NAME)
+print("[+] Update Complete!")
+print(" ∟ Accepted Arguments:", used_options)
+if len(used_options) != len(options):
+    print(" ∟ Unused Arguements:", [op for op in options if not op in used_options]) 

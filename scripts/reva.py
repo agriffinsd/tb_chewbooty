@@ -83,9 +83,12 @@ class RevaFile(object):
     
         
 if __name__ == "__main__":
-    reva = RevaFile.readfile("../reva/BSE - TB3 Planning - Reva.csv")
-    #for p in reva.data:
-    #    print (p.name, p.tbs)
-    
-    reva.to_javascript("../input_files/reva.js.in", "../reva/reva.js", int(sys.argv[1])-9)
-    
+    import os 
+    GUILD_NAME = sys.argv[2]
+    revaname = "../"+GUILD_NAME+"reva/BSE - TB3 Planning - Reva.csv"
+    if os.path.exists(revaname):
+        print("[+] Reva Mission data found - proceeding to build")
+        reva = RevaFile.readfile(revaname)
+        reva.to_javascript("../"+GUILD_NAME+"input_files/reva.js.in", "../"+GUILD_NAME+"reva/reva.js", int(sys.argv[1])-9)
+    else:
+        print("[-] Reva Mission data not found - disabling page build.")
