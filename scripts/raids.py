@@ -111,8 +111,8 @@ av_waves = [average_player.scores][0]
 for player in players[0:]:
     outdata.append([player.name, [float(score) for score in player.scores]])
 
-
-infile = open("../input_files/raids.js.in", "r")
+GUILD_NAME = sys.argv[2]
+infile = open("../"+GUILD_NAME+"input_files/raids.js.in", "r")
 filedata = infile.read()
 infile.close()
 replacestring = \
@@ -167,7 +167,7 @@ replacestring+=\
 replacestring += player_to_plots()
 replacestring += "]\n"
 
-outfile = open("../raids/raid.js", "w")
+outfile = open("../"+GUILD_NAME+"raids/raid.js", "w")
 filedata = filedata.replace("$$PLOTS", replacestring)
 outfile.write(filedata)
 outfile.close()
