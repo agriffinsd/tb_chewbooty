@@ -1,5 +1,5 @@
   * {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     font-family: sans-serif;
   }
@@ -17,14 +17,17 @@
     width: 100vw;
     height: calc(100vh - 40px);
     background: rgba(54, 162, 235, 0.2);
-    display: flex;
+    display: block;
+	margin: 0 auto;
     align-items: center;
     justify-content: center;
   }
   .chartBox {
-    width: 1500px;
+    width: 100vw;
 	height: calc(100vh - 40px);
     padding: 20px;
+	display: block;
+	margin: 0 auto;
     border-radius: 20px;
     border: solid 3px rgba(54, 162, 235, 1);
     background: white;
