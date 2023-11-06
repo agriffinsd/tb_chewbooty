@@ -425,6 +425,7 @@ const config = {
   type: 'line',
   data,
   options: {
+	maintainAspectRatio: false,
         scales: {
             x: {
                 ticks: {
