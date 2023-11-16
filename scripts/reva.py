@@ -14,14 +14,14 @@ class RevaPlayer(object):
         #print(row)
         name = row[1]
         rate = row[0]
-        readyin = row[2]
+        readyin = row[4]
         if readyin == "yes":
             ready ="true"
         elif readyin == "no" or readyin == "n/a":
             ready ="false"     
         tbs = []
         for it, val in enumerate(row):
-            if it > 2:
+            if it > 4:
                 if val == "yes":
                    tbs.append("true")
                 elif val == "no":

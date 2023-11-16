@@ -114,6 +114,8 @@ if "report" in options:
 else:
     os.system("python3 tbdata.py " + str(number_tbs) +" "+ GUILD_NAME)
 os.system("python3 reva.py " + str(number_tbs)+" "+ GUILD_NAME)
+os.system("python3 reva2.py "+ GUILD_NAME)
+
 
 print("[+] Updating player tb datas")
 
