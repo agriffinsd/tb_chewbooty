@@ -59,6 +59,7 @@ for player in zeffo.data:
         "    backgroundColor:  'rgb("+colour[0]+", "+colour[1]+", "+colour[2]+")',\n"+\
         "    borderColor:  'rgb("+colour[0]+", "+colour[1]+", "+colour[2]+")',\n"+\
         "    pointRadius: 10,\n"+\
+        "    pointHoverRadius: 8,\n"+\
         "    hidden: false,\n"+\
         "    },"
 
