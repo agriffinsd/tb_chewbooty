@@ -73,10 +73,10 @@ for row in range(number_of_rows):
         '</div>\n'+\
         '</div>\n'
         outstr += '<div class="w3-third w3-container">\n'+\
-        '      <a href="raids/raid.html"><img src="media/krayt.jpeg" alt="Players" style="width:100%" class="w3-hover-opacity"> </a>\n'+\
+        '      <a href="raids/raid.html"><img src="media/endor.jpeg" alt="Players" style="width:100%" class="w3-hover-opacity"> </a>\n'+\
         '      <div class="w3-container w3-white">\n'+\
         '<p><b>Raid Scores</b></p>\n'+\
-        '<p>Compare your Krayt Dragon score against other members and guild average.</p>\n'+\
+        '<p>Compare your Endor Raid score against other members and guild average.</p>\n'+\
         '</div>\n'+\
         '</div>\n'
         outstr += '<div class="w3-third w3-container">\n'+\
