@@ -61,9 +61,9 @@ raids = raidfile.readfile(sys.argv[1])
 players = raidfile.make_players(raids)
 average_player = player("Guild Average", [])
 
-crate90 = player("90m Guild Crate", [])
-crate130 = player("130m Guild Crate", [])
-crate265 = player("265m Guild Crate", [])
+crate90 = player("144m Guild Crate", [])
+crate130 = player("208m Guild Crate", [])
+crate265 = player("424m Guild Crate", [])
 
 crates = [crate90, crate130, crate265]
 
@@ -73,9 +73,9 @@ dates = []
 for raid in raids:
     raid.calc_average()
     raid.calc_total()
-    crate90.scores.append(str(90000000/50))
-    crate130.scores.append(str(130000000/50))
-    crate265.scores.append(str(265000000/50))
+    crate90.scores.append(str(144000000/50))
+    crate130.scores.append(str(208000000/50))
+    crate265.scores.append(str(424000000/50))
     #print(raid.total, raid.average)
     dates.append(raid.date.split(" ")[0])
     average_player.scores.append(raid.average)
