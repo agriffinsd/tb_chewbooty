@@ -9,9 +9,9 @@ options = sys.argv[1:]
 used_options = []
 GUILD_NAME = "unknown"
 for option in options:
-    if "BSE" in option:
-        GUILD_NAME="BSE/"
-        print("[+] Guild Accepted:", "BSE")
+    if "chewbooty" in option:
+        GUILD_NAME="chewbooty/"
+        print("[+] Guild Accepted:", "chewbooty")
         used_options.append(option)
 
 if GUILD_NAME == "unknown":
