@@ -79,13 +79,13 @@ for row in range(number_of_rows):
         '<p>Compare your Endor Raid score against other members and guild average.</p>\n'+\
         '</div>\n'+\
         '</div>\n'
-        outstr += '<div class="w3-third w3-container">\n'+\
-        '      <a href="Zeffo/zeffo.html"><img src="media/zeffo.jpeg" alt="Zeffo" style="width:100%" class="w3-hover-opacity"> </a>\n'+\
-        '      <div class="w3-container w3-white">\n'+\
-        '<p><b>Zeffo Mission</b></p>\n'+\
-        '<p>Zeffo Mission Success Rates</p>\n'+\
-        '</div>\n'+\
-        '</div>\n'
+        #outstr += '<div class="w3-third w3-container">\n'+\
+        #'      <a href="Zeffo/zeffo.html"><img src="media/zeffo.jpeg" alt="Zeffo" style="width:100%" class="w3-hover-opacity"> </a>\n'+\
+        #'      <div class="w3-container w3-white">\n'+\
+        #'<p><b>Zeffo Mission</b></p>\n'+\
+        #'<p>Zeffo Mission Success Rates</p>\n'+\
+        #'</div>\n'+\
+        #'</div>\n'
         #if r_it >=0:
         #    outstr += print_row(r_it,tbdata[r_it])
         #r_it -= 1
@@ -127,8 +127,8 @@ else:
 
 print("[+] Updating raid data")
 os.system("python3 raids.py ../"+GUILD_NAME+"raids/raids.csv " + GUILD_NAME)
-print("[+] Updating zeffo data")
-os.system("python3 zeffo.py " + GUILD_NAME)
+#print("[+] Updating zeffo data")
+#os.system("python3 zeffo.py " + GUILD_NAME)
 print("[+] Update Complete!")
 print(" ∟ Accepted Arguments:", used_options)
 if len(used_options) != len(options):
