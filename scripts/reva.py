@@ -85,7 +85,7 @@ class RevaFile(object):
 if __name__ == "__main__":
     import os 
     GUILD_NAME = sys.argv[2]
-    revaname = "../"+GUILD_NAME+"reva/BSE - TB3 Planning - Reva.csv"
+    revaname = "../"+GUILD_NAME+"reva/Chewbooty - TB Planning - Reva.csv"
     if os.path.exists(revaname):
         print("[+] Reva Mission data found - proceeding to build")
         reva = RevaFile.readfile(revaname)

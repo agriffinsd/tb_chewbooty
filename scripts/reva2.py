@@ -33,7 +33,7 @@ class RevaFile(object):
 
 import os 
 GUILD_NAME = sys.argv[1]
-zeffoname = "../"+GUILD_NAME+"reva/BSE - TB3 Planning - Reva.csv"
+zeffoname = "../"+GUILD_NAME+"reva/Chewbooty - TB Planning - Reva.csv"
 if os.path.exists(zeffoname):
     print("[+] Reva Mission data found - proceeding to build")
     zeffo = RevaFile.readfile(zeffoname)
