@@ -1,0 +1,46 @@
+// setup 
+const data = {
+  datasets: [
+$$DATA
+]
+
+};
+
+// config 
+const config = {
+  type: 'scatter',
+  data,
+  options: {
+	//maintainAspectRatio: false,
+        scales: {
+            x: {
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 90,
+                    minRotation: 90
+                },
+                title: {
+                    display: true,
+                    text: 'Attempts'
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Successes'
+                }
+            }
+        }
+    }
+
+};
+
+// render init block
+const myChart = new Chart(
+  document.getElementById('myChart'),
+  config
+);
+
+// Instantly assign Chart.js version
+const chartVersion = document.getElementById('chartVersion');
+chartVersion.innerText = Chart.version;
