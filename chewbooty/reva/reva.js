@@ -3,7 +3,7 @@ var tabledata = [
 {id:1, name:"s0da p0pinski", revaready:"true", rate:"100%",tb10:"true",tb11:"true",},
 {id:2, name:"Zazztrain", revaready:"true", rate:"100%",tb10:"true",tb11:"true",},
 {id:3, name:"MINI Mace Dymon", revaready:"true", rate:"91%",tb10:"false",tb11:"true",},
-{id:4, name:"MINIxur'kthan", revaready:"true", rate:"91%",tb10:"false",tb11:"true",},
+{id:4, name:"MINIxurkthan", revaready:"true", rate:"91%",tb10:"false",tb11:"true",},
 {id:5, name:"Mega Kicagemon", revaready:"true", rate:"90%",tb10:"false",tb11:"true",},
 {id:6, name:"ItzBerndern", revaready:"true", rate:"64%",tb10:"false",tb11:"false",},
 {id:7, name:"OhMyPretzel", revaready:"true", rate:"64%",tb10:"true",tb11:"false",},
